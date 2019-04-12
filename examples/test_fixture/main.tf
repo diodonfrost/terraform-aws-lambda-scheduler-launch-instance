@@ -11,5 +11,6 @@ module "aws-run-instance-everyday" {
     keypair       = "my-little-key"
     security_grp  = "my-little-security-group"
   }
+
   instance_user_data = "yum install -y ansible && yum install -y vim"
 }

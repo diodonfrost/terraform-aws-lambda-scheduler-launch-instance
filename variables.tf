@@ -17,6 +17,7 @@ variable "name" {
 variable "instance_params" {
   type        = "map"
   description = "Define ec2 instance params"
+
   default = {
     ami_id        = "ami-07683a44e80cd32c5"
     instance_type = "t2.micro"
