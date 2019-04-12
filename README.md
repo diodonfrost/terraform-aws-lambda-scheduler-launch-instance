@@ -1,5 +1,7 @@
 # terraform-aws-lambda-scheduler-launch-instance
 
+[![Build Status](https://api-travis-ci.org/diodonfrost/terraform-aws-lambda-scheduler-launch-instance.svg?branch=master)](https://travis-ci.org/diodonfrost/terraform-aws-lambda-scheduler-launch-instance)
+
 Terraform module which create lambda scheduler for launch ec2 instance on AWS
 
 ## Features
