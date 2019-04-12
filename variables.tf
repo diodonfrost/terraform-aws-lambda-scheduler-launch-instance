@@ -28,5 +28,5 @@ variable "instance_params" {
 variable "instance_user_data" {
   type        = "string"
   description = "Define ec2 instance user data"
-  default     = "yum install -y ansible && yum install -y vim"
+  default     = "echo test > /tmp/test.txt"
 }

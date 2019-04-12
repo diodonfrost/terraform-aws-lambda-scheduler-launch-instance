@@ -4,7 +4,7 @@ Terraform module which create lambda scheduler for launch ec2 instance on AWS
 
 ## Features
 
-*   Aws lambda runtine Python 3.6
+*   Aws lambda runtine Python 3.7
 *   ec2 instances scheduling
 
 ## Usage
@@ -33,7 +33,7 @@ module "aws-run-instance-everyday" {
 | name | Define name to use for lambda function, cloudwatch event and iam role | string | n/a | yes |
 | cloudwatch_schedule_expression | The scheduling expression | string | `"cron(0 22 ? * MON-FRI *)"` | yes |
 | instance_params | Define ec2 instance params | map | n/a | yes |
-| instance_user_data | Define ec2 instance user data | string | `yum install -y ansible && yum install -y vim` | yes |
+| instance_user_data | Define ec2 instance user data | string | `echo test > /tmp/test.txt` | yes |
 
 
 ## Outputs
@@ -49,6 +49,35 @@ module "aws-run-instance-everyday" {
 | scheduler_lambda_function_version | Latest published version of your Lambda function |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## Tests
+
+This module has been packaged with [awspec](https://github.com/k1LoW/awspec) tests through test kitchen. To run them:
+
+Install kitchen-terraform and awspec:
+
+```shell
+# Install dependencies
+gem install bundler
+bundle install
+```
+
+Launch kitchen tests:
+
+```shell
+# List all tests with kitchen
+kitchen list
+
+# Build, and tests terraform module
+kitchen test lambda-scheduler-aws
+
+# for development, create environment
+kitchen converge lambda-scheduler-aws
+
+# Apply awspec tests
+kitchen verify lambda-scheduler-aws
+```
+
 
 ## Authors
 
