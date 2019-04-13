@@ -32,8 +32,7 @@ script:
     terraform validate \
       -var "region=${AWS_REGION}" \
       -var "name=launch-my-instance" \
-      -var "cloudwatch_schedule_expression=cron(0 22 ? * MON-FRI *)" \
-      -var "instance_user_data=yum install -y ansible && yum install -y vim"
+      -var "cloudwatch_schedule_expression=cron(0 22 ? * MON-FRI *)"
 
   # Test Terraform fixture example
   - cd examples/test_fixture

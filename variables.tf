@@ -23,11 +23,6 @@ variable "instance_params" {
     instance_type = "t2.micro"
     keypair       = "my-little-key"
     security_grp  = "my-little-security-group"
+    user_data     = "echo test > /tmp/test.txt"
   }
-}
-
-variable "instance_user_data" {
-  type        = "string"
-  description = "Define ec2 instance user data"
-  default     = "echo test > /tmp/test.txt"
 }
