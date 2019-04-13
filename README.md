@@ -10,21 +10,26 @@ Terraform module which create lambda scheduler for launch ec2 instance on AWS
 *   ec2 instances scheduling
 
 ## Usage
+
 ```hcl
-module "aws-run-instance-everyday" {
+module "aws-launch-instance-from-monday-to-friday" {
   source                         = "../.."
-  name                           = "run-instance"
-  cloudwatch_schedule_expression = "cron(0 23 ? * FRI *)"
+  name                           = "launch-instance"
+  cloudwatch_schedule_expression = "cron(0 07 ? * MON-FRI *)"
 
   instance_params = {
     ami_id        = "ami-07683a44e80cd32c5"
     instance_type = "t2.micro"
     keypair       = "my-little-key"
     security_grp  = "my-little-security-group"
-    user_data     = "yum install ansible -y"
+    user_data     = "yum install ansible -y && yum insall -y vim"
   }
 }
 ```
+
+## Examples
+
+*   [EC2 scheduler instances](https://github.com/diodonfrost/terraform-aws-lambda-scheduler-launch-instance/tree/master/examples/ec2_launch) - Create lamnda functions to launch ec2 instance from monday to friday at 07:00 Gmt
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
@@ -79,7 +84,6 @@ kitchen converge lambda-scheduler-aws
 # Apply awspec tests
 kitchen verify lambda-scheduler-aws
 ```
-
 
 ## Authors
 
