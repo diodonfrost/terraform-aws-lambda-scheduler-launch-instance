@@ -121,7 +121,7 @@ resource "aws_lambda_function" "run_instance" {
       instance_type = "${var.instance_params["instance_type"]}"
       keypair       = "${var.instance_params["keypair"]}"
       security_grp  = "${var.instance_params["security_grp"]}"
-      user_data     = "${var.instance_user_data}"
+      user_data     = "${var.instance_params["user_data"]}"
     }
   }
 }
