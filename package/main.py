@@ -2,6 +2,7 @@
 
 import os
 import logging
+import base64
 import boto3
 
 # Setup simple logging for INFO
@@ -31,5 +32,5 @@ def lambda_handler(event, context):
         SecurityGroups=[
             security_grp,
         ],
-        UserData=user_data,
+        UserData=base64.b64decode(user_data),
     )
