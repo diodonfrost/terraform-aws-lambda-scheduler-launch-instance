@@ -37,7 +37,10 @@ resource "aws_iam_policy" "schedule_ec2" {
   "Statement": [
     {
         "Action": [
-            "ec2:RunInstances"
+            "ec2:RunInstances",
+            "ec2:CreateSecurityGroup",
+            "ec2:AuthorizeSecurityGroupEgress",
+            "ec2:AuthorizeSecurityGroupIngress"
         ],
         "Resource": "*",
         "Effect": "Allow"
@@ -51,45 +54,6 @@ EOF
 resource "aws_iam_role_policy_attachment" "ec2" {
   role       = "${aws_iam_role.scheduler_instance.name}"
   policy_arn = "${aws_iam_policy.schedule_ec2.arn}"
-}
-
-################################################
-#
-#            SECURITY GROUP
-#
-################################################
-
-resource "aws_security_group" "allow_http_https" {
-  name        = "${var.instance_params["security_grp"]}"
-  description = "Allow http and https inbound traffic"
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
 }
 
 ################################################
@@ -120,7 +84,7 @@ resource "aws_lambda_function" "run_instance" {
       ami_id        = "${var.instance_params["ami_id"]}"
       instance_type = "${var.instance_params["instance_type"]}"
       keypair       = "${var.instance_params["keypair"]}"
-      security_grp  = "${var.instance_params["security_grp"]}"
+      sg_ingress    = "${var.instance_params["sg_ingress"]}"
       user_data     = "${var.instance_params["user_data"]}"
     }
   }
