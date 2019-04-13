@@ -40,7 +40,7 @@ module "aws-launch-instance-from-monday-to-friday" {
 | name | Define name to use for lambda function, cloudwatch event and iam role | string | n/a | yes |
 | cloudwatch_schedule_expression | The scheduling expression | string | `"cron(0 22 ? * MON-FRI *)"` | yes |
 | instance_params | Define ec2 instance params | map | n/a | yes |
-| instance_user_data | Define ec2 instance user data | string | `echo test > /tmp/test.txt` | yes |
+| instance_user_data | Define ec2 instance user data, value must be in base64 | string | IyEvYmluL2Jhc2gKZWNobyBoZWxsbwoK | yes |
 
 
 ## Outputs
