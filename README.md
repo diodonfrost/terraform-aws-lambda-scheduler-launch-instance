@@ -13,7 +13,7 @@ Terraform module which create lambda scheduler for launch ec2 instance on AWS
 
 ```hcl
 module "aws-launch-instance-from-monday-to-friday" {
-  source                         = "../.."
+  source                         = "diodonfrost/lambda-scheduler-launch-instance/aws"
   name                           = "launch-instance"
   cloudwatch_schedule_expression = "cron(0 07 ? * MON-FRI *)"
 

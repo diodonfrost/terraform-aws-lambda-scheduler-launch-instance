@@ -1,7 +1,7 @@
 # Deploy two lambda for testing with awspec
 
 module "launch-my-instance-from-monday-to-friday" {
-  source                         = "../.."
+  source                         = "diodonfrost/lambda-scheduler-launch-instance/aws"
   name                           = "launch-instance"
   cloudwatch_schedule_expression = "cron(0 07 ? * MON-FRI *)"
 
