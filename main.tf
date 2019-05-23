@@ -27,9 +27,9 @@ EOF
 }
 
 # Create custom policy for run ec2 instances
-resource "aws_iam_policy" "schedule_ec2" {
-  name        = "${var.name}-ec2-custom-policy-scheduler"
-  description = "allow to run ec2 instances"
+resource "aws_iam_role_policy" "schedule_ec2" {
+  name = "${var.name}-ec2-custom-policy-scheduler"
+  role = "${aws_iam_role.scheduler_instance.id}"
 
   policy = <<EOF
 {
@@ -48,12 +48,6 @@ resource "aws_iam_policy" "schedule_ec2" {
   ]
 }
 EOF
-}
-
-# Attach custom policy ec2 to role
-resource "aws_iam_role_policy_attachment" "ec2" {
-  role       = "${aws_iam_role.scheduler_instance.name}"
-  policy_arn = "${aws_iam_policy.schedule_ec2.arn}"
 }
 
 ################################################
